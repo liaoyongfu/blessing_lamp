@@ -24,7 +24,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(
+        title: '1',
+      ),
     );
   }
 }
@@ -63,6 +65,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    onPress() {
+      print("Hello World");
+    }
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -70,46 +76,110 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        body: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image.asset(
+                'assets/images/test.jpg',
+                fit: BoxFit.fill,
+                height: MediaQuery.of(context).size.height * 0.3,
+              ),
+              Container(
+                padding: EdgeInsets.all(20),
+                child: Form(
+                  child: Column(
+                    children: [
+                      const Center(
+                        child: Text("请输入用户信息登录", style: TextStyle(fontSize: 18, color: Color.fromRGBO(134, 114, 99, 1))),
+                      ),
+                      const SizedBox(height: 20,),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          hintText: '手机号',
+                          contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(2.0),
+                            borderSide:
+                            const BorderSide(color: Colors.red, width: 1.0),
+                          ),
+                        ),
+                        style: const TextStyle(height: 1.0),
+                      ),
+                      const SizedBox(height: 20,),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            hintText: '密码',
+                            contentPadding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(2.0),
+                              borderSide:
+                              const BorderSide(color: Colors.red, width: 1.0),
+                            )
+                        ),
+                        obscureText: true,
+                        style: const TextStyle(height: 1.0),
+                      ),
+                      const SizedBox(height: 20,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [Text("手机号登录", style: TextStyle(color: Color.fromRGBO(134, 114, 99, 1))), Text("忘记密码？", style: TextStyle(color: Color.fromRGBO(134, 114, 99, 1)))],
+                      ),
+                      const SizedBox(height: 10,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(child: ElevatedButton(onPressed: onPress, child: const Text("注册"), style: ElevatedButton.styleFrom(primary: const Color.fromRGBO(196, 185, 166, 1)),)),
+                          const SizedBox(width: 20),
+                          Expanded(child: ElevatedButton(onPressed: onPress, child: const Text("登录"), style: ElevatedButton.styleFrom(primary: const Color.fromRGBO(220, 174, 68, 1)))),
+                        ],
+                      ),
+                      const SizedBox(height: 10,),
+                      const Align(
+                        alignment: Alignment.centerRight,
+                        child: Text("游客登录>", style: TextStyle(color: Color.fromRGBO(134, 114, 99, 1))),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        Column(
+          children: [
+            Row(
+              children: [
+                const SizedBox(width: 20,),
+                Expanded(child: Divider(color: Colors.black45, height: 1.0,)),
+                const SizedBox(width: 2,),
+                Container(
+                  child: const Text("合作账号登录",),
+                  padding: EdgeInsets.fromLTRB(30, 5, 30, 5),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black12),
+                    borderRadius: BorderRadius.circular(2.0)
+                  ),
+                ),
+                const SizedBox(width: 2,),
+                Expanded(child: Divider(color: Colors.black45, height: 1.0,),),
+                const SizedBox(width: 20,),
+              ],
+            ),
+            const SizedBox(height: 20,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.wechat, color: Color.fromRGBO(203, 192, 173, 1), size: 54.0)
+              ],
+            ),
+            const SizedBox(height: 20,),
+          ],
+        )
+      ],
+    ));
   }
 }
